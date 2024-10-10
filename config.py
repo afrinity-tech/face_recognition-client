@@ -1,5 +1,5 @@
 class Config:
-    MQTT_BROKER = '10.15.10.11'
+    MQTT_BROKER = 'hit.tetisol.com'
     MQTT_PORT = 1883
     MQTT_TOPIC = 'camera_feed'
     MQTT_FEEDBACK_TOPIC = 'face_recognition/feedback'

@@ -1,3 +1,4 @@
+import time
 import paho.mqtt.client as mqtt
 from audio_player import AudioPlayer
 
@@ -9,7 +10,7 @@ class MqttClient:
         self.client.on_message = self.on_message
         self.last_name = None  # Store the last received name
         self.consecutive_feedbacks = {}  # Store consecutive feedbacks for each name
-        self.played_names = set()  # Store names for which audio has been played
+    
         self.audio_player = AudioPlayer(self.config.AUDIO_FILES)  # Initialize AudioPlayer
 
     def on_connect(self, client, userdata, flags, rc):
@@ -32,11 +33,11 @@ class MqttClient:
             else:
                 self.consecutive_feedbacks[name] = 1
 
-            if self.consecutive_feedbacks[name] == 5 and name not in self.played_names:
+            if self.consecutive_feedbacks[name] == 2:
                 print(f"Playing audio for {name}")
                 self.audio_player.play(name)
                 self.consecutive_feedbacks[name] = 0
-                self.played_names.add(name)
+                
 
             self.last_name = name
 
@@ -46,8 +47,13 @@ class MqttClient:
             self.audio_player.play(name)
 
     def connect(self):
-        self.client.connect(self.config.MQTT_BROKER, self.config.MQTT_PORT)
-        self.client.loop_forever()  # Keep the client running and checking for messages
+        while True:
+            try:
+                self.client.connect(self.config.MQTT_BROKER, self.config.MQTT_PORT)
+                self.client.loop_forever()  # Keep the client running and checking for messages
+            except Exception as e:
+                print(f"Connection failed: {e}. Retrying in 5 seconds...")
+                time.sleep(5)  # Wait for 5 seconds before retrying
 
 # Example usage
 if __name__ == "__main__":
