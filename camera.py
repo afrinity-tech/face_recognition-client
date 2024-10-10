@@ -31,6 +31,7 @@ class VideoCapture:
 
                 # Publish base64 string to MQTT topic
                 self.mqtt_client.client.publish(self.config.MQTT_TOPIC, image_base64)
+                
 
             # Display the frame
             cv2.namedWindow('frame', cv2.WINDOW_NORMAL)

@@ -1,14 +1,20 @@
 class Config:
     MQTT_BROKER = '10.15.10.11'
     MQTT_PORT = 1883
-    MQTT_TOPIC = 'face_recognition'
+    MQTT_TOPIC = 'camera_feed'
     MQTT_FEEDBACK_TOPIC = 'face_recognition/feedback'
+    MQTT_ALERT_TOPIC = 'face_recognition/alert'
     FRAME_RATE = 2
     AUDIO_FILES = {
-        'Rufaro': 'sound/rufaro.mp3',
-        'Magadza': 'sound/magadza.mp3',
-        'Tadiwa': 'sound/tadiwa.mp3',
-        'VC': 'sound/vc.mp3',
-        'Amos': 'sound/amos.mp3',
-        'President': 'sound/president.mp3'
+        'AMmorning': 'sound/morningAM.mp3',
+        'AMafternoon': 'sound/afternoonAM.mp3',
+        'VCmorning': 'sound/morningVC.mp3',
+        'VCafternoon': 'sound/afternoonVC.mp3',
+        'EDmorning': 'sound/morningED.mp3',
+        'EDafternoon': 'sound/afternoonED.mp3',
+        'departure': 'sound/departure.mp3',
+        'arrive': 'sound/arrive.mp3',
+        'dooropen': 'sound/dooropen.mp3',
+        'arrive': 'sound/arrive.mp3',
+        'doorclose': 'sound/doorclose.mp3'
     }
